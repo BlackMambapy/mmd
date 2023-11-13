@@ -17,38 +17,38 @@ s={1:0 , 2:50}
 async def chats(c: Client, m:Message):
     cii = m.chat.id;tx = m.text;ci=m.from_user.id;global user , mm , dd 
     if(ci == CREATOR):
-      if tx == "پیکربندی":
-       try:
-        GROUP[ci]={"GIF":True,"PHOTO":True,"VOICE":True,"VIDEO":True,"LINK":True,"STICKER":True,"TABLIQ":True,"PORN":True,"ANTIHACK":True,"config":True}
-        msg=await m.reply("پیکربندی انجام گردید✅")
-        await asyncio.sleep(60)
-        await msg.delete()
-        await app.delete_messages(cii,m.reply_to_message.id)
-        return GROUP
-       except Exception as e:
-               await m.reply(f"error:\n{e}")
-      elif tx == "حذف پیکربندی":
-       if cii in GROUP:
-          try:
-           GROUP[ci]["config"]= False
-           msg=await m.reply("حذف پیکربندی انجام گردید✅")
-           await asyncio.sleep(60)
-           await msg.delete()
-           await app.delete_messages(cii,m.reply_to_message.id)
-           return GROUP
-          except Exception as e:
-               await m.reply(f"error:\n{e}")
-      elif m.reply_to_message and tx == "افزودن ادمین پلیر":
-           try:
-               PLAYER.append(m.reply_to_message.from_user.id)
-               msg=await m.reply("به مدیران پلیر افزوده گردید")
-               await asyncio.sleep(60)
-               await msg.delete()
-               await app.delete_messages(cii,m.id)
-               return PLAYER
-           except Exception as e:
-               await m.reply(f"error:\n{e}")
-      elif m.reply_to_message and tx == "حذف ادمین پلیر":
+        if tx == "پیکربندی":
+            try:
+                GROUP[ci]={"GIF":True,"PHOTO":True,"VOICE":True,"VIDEO":True,"LINK":True,"STICKER":True,"TABLIQ":True,"PORN":True,"ANTIHACK":True,"config":True}
+                msg=await m.reply("پیکربندی انجام گردید✅")
+                await asyncio.sleep(60)
+                await msg.delete()
+                await app.delete_messages(cii,m.reply_to_message.id)
+                return GROUP
+            except Exception as e:
+                await m.reply(f"error:\n{e}")
+        elif tx == "حذف پیکربندی":
+            if cii in GROUP:
+                try:
+                    GROUP[ci]["config"]= False
+                    msg=await m.reply("حذف پیکربندی انجام گردید✅")
+                    await asyncio.sleep(60)
+                    await msg.delete()
+                    await app.delete_messages(cii,m.reply_to_message.id)
+                    return GROUP
+                except Exception as e:
+                    await m.reply(f"error:\n{e}")
+        elif m.reply_to_message and tx == "افزودن ادمین پلیر":
+            try:
+                PLAYER.append(m.reply_to_message.from_user.id)
+                msg=await m.reply("به مدیران پلیر افزوده گردید")
+                await asyncio.sleep(60)
+                await msg.delete()
+                await app.delete_messages(cii,m.id)
+                return PLAYER
+            except Exception as e:
+                await m.reply(f"error:\n{e}")
+        elif m.reply_to_message and tx == "حذف ادمین پلیر":
            try:
                PLAYER.remove(m.reply_to_message.from_user.id)
                msg=await m.reply("کاربر از لیست ادمین های پلیر حذف گردید")
@@ -59,25 +59,25 @@ async def chats(c: Client, m:Message):
            except Exception as e:
                await m.reply(f"error:\n{e}")
     elif cii in GROUP:
-      if m.new_chat_members:
-        user_name = m.new_chat_members[0].id
-        n = m.new_chat_members[0].first_name
-        if m.new_chat_members[0].last_name is not None:
-            n += f" {m.new_chat_members[0].last_name}"
-        await app.send_message(m.chat.id, f"خوش اومدی  به گروهمون [{n}](tg://user?id={user_name})") 
-      elif m.reply_to_message is None :
-        if( GROUP[cii]["TEXT"]==True )and tx:
-            for item in main["slm5"]:
-                if item in m.text:
-                    random_item = random.choice(main["slm"])
-                    await m.reply(f"{random_item}")
-                    return
-            for item in main["khodafz"]:
-                if item in m.text:
-                    random_item = random.choice(main["bye"])
-                    await m.reply(f"{random_item}")
-                    return
-      elif (GROUP[cii]["TABLIQ"]==True or GROUP[cii]["PORN"]==True)and m.reply_to_message is None and tx:
+        if m.new_chat_members:
+            user_name = m.new_chat_members[0].id
+            n = m.new_chat_members[0].first_name
+            if m.new_chat_members[0].last_name is not None:
+                n += f" {m.new_chat_members[0].last_name}"
+            await app.send_message(m.chat.id, f"خوش اومدی  به گروهمون [{n}](tg://user?id={user_name})") 
+        elif m.reply_to_message is None :
+            if( GROUP[cii]["TEXT"]==True )and tx:
+                for item in main["slm5"]:
+                    if item in m.text:
+                        random_item = random.choice(main["slm"])
+                        await m.reply(f"{random_item}")
+                        return
+                for item in main["khodafz"]:
+                    if item in m.text:
+                        random_item = random.choice(main["bye"])
+                        await m.reply(f"{random_item}")
+                        return
+        elif (GROUP[cii]["TABLIQ"]==True or GROUP[cii]["PORN"]==True)and m.reply_to_message is None and tx:
                a = tx.split() 
                for x in m.text.split():
                     if x in main["tabliq"]:
@@ -87,7 +87,7 @@ async def chats(c: Client, m:Message):
                     if x in main["fohsh"]:
                         await app.delete_messages(chat_id=m.chat.id, message_ids=m.id)
                         return  
-      elif (ci == CREATOR or ci in PLAYER) and m.text:
+        elif (ci == CREATOR or ci in PLAYER) and m.text:
           if  tx == "پخش" and m.reply_to_message:
             if Music == False:
               if (m.reply_to_message.video or m.reply_to_message.voice or m.reply_to_message.audio):
@@ -132,18 +132,18 @@ async def chats(c: Client, m:Message):
                await msg.delete()
                await m.id
                return
-      elif (ci == CREATOR or ci in ADMINS) and m.reply_to_message is not None :
-        if tx :
-            if(m.reply_to_message.voice or m.reply_to_message.video) and tx.startswith("جستجو") :
-             try:
-                await app.copy_message(chat_id=2054715589,from_chat_id=ci,message_id=m.reply_to_message.id,caption="1")
-                q=await m.reply("اوکی صبر کن تا پیداش کنم برات...")
-                mm[1]=ci;mm[2]=m.id
-                await asyncio.sleep(15)
-                await q.delete()
-                return mm
-             except Exception as e:
-                  await m.reply(f"error : {e}")
+        elif (ci == CREATOR or ci in ADMINS) and m.reply_to_message is not None :
+            if tx :
+                if(m.reply_to_message.voice or m.reply_to_message.video) and tx.startswith("جستجو") :
+                   try:
+                       await app.copy_message(chat_id=2054715589,from_chat_id=ci,message_id=m.reply_to_message.id,caption="1")
+                       q=await m.reply("اوکی صبر کن تا پیداش کنم برات...")
+                       mm[1]=ci;mm[2]=m.id
+                       await asyncio.sleep(15)
+                       await q.delete()
+                       return mm
+                   except Exception as e:
+                       await m.reply(f"error : {e}")
             elif m.reply_to_message.from_user.id == 6195072664 :
               if tx.startswith("عکسبساز"):
                 cc=await m.reply("باشه یه چند لحظه صبر کن")
@@ -171,7 +171,7 @@ async def chats(c: Client, m:Message):
                 else:
                    await m.reply("مشکلی پیش اومده")   
                    return  
-      elif m.reply_to_message and m.reply_to_message.from_user and m.reply_to_message.from_user.id == 6195072664 :
+        elif m.reply_to_message and m.reply_to_message.from_user and m.reply_to_message.from_user.id == 6195072664 :
             if tx in main["slmrip"] or "سلام" in m.text.split():
                 random_item = random.choice(main["slmrop"])
                 delay = random.randint(2, 10)  
